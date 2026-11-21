@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TUNTAS: teacher view</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/common.js" defer></script>
+  <script src="/static/teacher.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to the class table</a>
+  <header class="app">
+    <h1>TUNTAS</h1>
+    <span class="ctx" data-i18n="tagline">Teacher view: where each learner needs help</span>
+    <nav aria-label="Language and views">
+      <button type="button" class="secondary lang" data-lang="en" aria-pressed="true">English</button>
+      <button type="button" class="secondary lang" data-lang="id" aria-pressed="false">Bahasa Indonesia</button>
+      <a href="/" data-i18n="learnerLink">Learner view</a>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="panel" aria-labelledby="class-h">
+      <h2 id="class-h" data-i18n="classTitle">Your class</h2>
+      <form id="class-form" class="row" novalidate>
+        <div class="field">
+          <label for="class-code" data-i18n="classCode">Class code</label>
+          <input type="text" id="class-code" autocomplete="off" required pattern="[A-Za-z0-9_\-]{2,20}">
+        </div>
+        <button type="submit" class="primary" id="load-btn" data-i18n="loadBtn">Show class</button>
+      </form>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <div id="alert" class="alert" role="alert" hidden></div>
+
+    <section class="panel spaced" id="result" aria-labelledby="result-h" hidden>
+      <h2 id="result-h"></h2>
+      <p class="note" id="legend"></p>
+      <p class="note" id="refreshed"></p>
+      <p id="empty" hidden></p>
+      <div class="table-wrap" id="table-wrap" hidden>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" data-i18n="colLearner">Learner</th>
+              <th scope="col" data-i18n="colProblem">Problem</th>
+              <th scope="col" data-i18n="colStep">Current step</th>
+              <th scope="col" data-i18n="colWeakest">Weakest concept</th>
+              <th scope="col" data-i18n="colHints">Hints (per step)</th>
+              <th scope="col" data-i18n="colFlags">Needs help</th>
+              <th scope="col" data-i18n="colUpdated">Last activity</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

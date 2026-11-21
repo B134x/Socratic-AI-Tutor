@@ -1,0 +1,9 @@
+# Local learner data: never commit it.
+data/
+*.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

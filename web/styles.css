@@ -1,0 +1,144 @@
+/* Design read: classroom practice tool, calm and plain. ENERGY 1 / RHYTHM 1 / MOTION 1.
+   One accent (deep teal) means "the gate / passed", the same as in the essay's Figure 1.
+   System font stack: renders on school Windows PCs and Android phones without a download. */
+:root {
+  --ink: #1F2A33;
+  --muted: #4A5560;
+  --locked: #5A636B;
+  --line: #CDD3D8;
+  --paper: #FFFFFF;
+  --base: #F4F5F6;
+  --accent: #24524F;
+  --accent-dark: #1A3D3B;
+  --accent-soft: #E3EEEC;
+  --error: #9B2C2C;
+  --error-soft: #FBEAEA;
+  --focus: #1F6FD0;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  background: var(--base);
+  color: var(--ink);
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+a, button, summary, select, label[for], [role="button"] { cursor: pointer; }
+button:disabled, [aria-disabled="true"] { cursor: not-allowed; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+.skip-link { position: absolute; left: -999px; top: 0; background: var(--paper); padding: 8px 12px; }
+.skip-link:focus { left: 8px; top: 8px; z-index: 10; }
+
+header.app {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+}
+header.app h1 { font-size: 1.25rem; margin: 0; }
+header.app .ctx { color: var(--muted); font-size: 0.95rem; }
+header.app nav { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+header.app nav a { color: var(--accent); }
+
+main { max-width: 1120px; margin: 0 auto; padding: 16px; }
+
+.panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 16px;
+}
+.panel h2 { font-size: 1rem; margin: 0 0 10px; color: var(--muted); font-weight: 600; }
+.panel.spaced { margin-top: 14px; }
+
+.layout { display: grid; grid-template-columns: 280px 1fr 240px; gap: 14px; align-items: start; }
+@media (max-width: 900px) {
+  /* One column: the tutor goes first so the question and answer field are on screen without scrolling. */
+  .layout { grid-template-columns: 1fr; }
+  .layout .tutor { order: -1; }
+  ol.steps { display: flex; flex-wrap: wrap; gap: 6px; }
+  ol.steps li { margin: 0; padding: 4px 8px; font-size: 0.9rem; }
+  ol.steps .state { display: inline; margin-left: 4px; }
+  ol.steps .state::before { content: "· "; }
+}
+
+form.stack { display: grid; gap: 12px; max-width: 420px; }
+label { font-weight: 600; font-size: 0.95rem; }
+.field { display: grid; gap: 4px; }
+.help { color: var(--muted); font-size: 0.9rem; font-weight: 400; }
+input[type="text"] {
+  font: inherit;
+  font-size: 1.05rem;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid #7F8A93;
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  width: 100%;
+}
+
+button {
+  font: inherit;
+  font-weight: 600;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--accent);
+}
+button.primary { background: var(--accent); color: #FFFFFF; }
+button.primary:hover:not(:disabled) { background: var(--accent-dark); text-decoration: underline; text-underline-offset: 3px; }
+button.secondary { background: var(--paper); color: var(--accent); }
+button.secondary:hover:not(:disabled) { background: var(--accent-soft); text-decoration: underline; text-underline-offset: 3px; }
+button:active:not(:disabled) { transform: translateY(1px); }
+button:disabled { opacity: 0.55; }
+button.lang[aria-pressed="true"] { background: var(--accent-soft); }
+
+.problem { font-family: "Cambria Math", "Times New Roman", serif; font-size: 1.4rem; margin: 0 0 12px; }
+
+ol.steps { list-style: none; margin: 0; padding: 0; }
+ol.steps li { border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; }
+ol.steps .state { display: block; font-size: 0.85rem; color: var(--muted); }
+ol.steps li.done { background: #F7F9F9; }
+ol.steps li.current { border: 2px solid var(--accent); background: var(--accent-soft); }
+ol.steps li.locked, ol.steps li.skipped { color: var(--locked); background: var(--base); }
+
+.log { display: grid; gap: 8px; margin-bottom: 12px; }
+.log:empty { display: none; }
+.msg { background: var(--base); border-radius: 6px; padding: 8px 12px; margin: 0; }
+.msg.mine { background: var(--paper); border: 1px solid var(--line); justify-self: end; max-width: 85%; }
+.msg.mine .who { color: var(--muted); font-size: 0.85rem; display: block; }
+.prompt { border: 2px solid var(--accent); border-radius: 6px; padding: 12px; }
+.prompt p { margin: 0 0 10px; font-size: 1.05rem; }
+.prompt.review { border-color: var(--line); background: #FBFCFC; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: end; }
+.row .field { flex: 1 1 200px; }
+
+.status { min-height: 1.4em; margin: 8px 0 0; color: var(--muted); }
+input[aria-invalid="true"] { border: 2px solid var(--error); }
+.alert { border: 1px solid var(--error); background: var(--error-soft); color: var(--error); border-radius: 6px; padding: 10px 12px; margin: 10px 0; }
+.alert strong { display: block; }
+
+.meter { margin-bottom: 12px; }
+.meter .top { font-size: 0.92rem; }
+.meter .top strong { display: block; }
+.meter .bar { position: relative; height: 10px; background: #E1E5E8; border-radius: 3px; margin-top: 8px; }
+.meter .fill { position: absolute; inset: 0 auto 0 0; background: var(--ink); border-radius: 3px; }
+.meter .fill.pass { background: var(--accent); }
+.meter .thr { position: absolute; top: -4px; bottom: -4px; border-left: 2px dashed var(--muted); }
+.note { color: var(--muted); font-size: 0.9rem; }
+
+table { border-collapse: collapse; width: 100%; background: var(--paper); }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 0.95rem; }
+th { color: var(--muted); font-weight: 600; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; }
+.flag { color: var(--error); font-weight: 600; }
+td.nowrap { white-space: nowrap; }
+[hidden] { display: none !important; }

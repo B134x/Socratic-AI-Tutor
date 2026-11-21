@@ -1,0 +1,3 @@
+# Optional: only for TUNTAS_PHRASER=claude (AI rewording of feedback). The core app does not need it.
+-r requirements.txt
+anthropic>=2.12,<3

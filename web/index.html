@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TUNTAS: practice with gates</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/common.js" defer></script>
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to the exercise</a>
+  <header class="app">
+    <h1>TUNTAS</h1>
+    <span class="ctx" data-i18n="tagline">Quadratic equations, one step at a time</span>
+    <nav aria-label="Language and views">
+      <button type="button" class="secondary lang" data-lang="en" aria-pressed="true">English</button>
+      <button type="button" class="secondary lang" data-lang="id" aria-pressed="false">Bahasa Indonesia</button>
+      <a href="/teacher" data-i18n="teacherLink">Teacher view</a>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div id="alert" class="alert" role="alert" hidden></div>
+
+    <section id="start-view" class="panel" aria-labelledby="start-h">
+      <h2 id="start-h" data-i18n="startTitle">Start with your own problem</h2>
+      <form id="start-form" class="stack" novalidate>
+        <div class="field">
+          <label for="class-code" data-i18n="classCode">Class code</label>
+          <input type="text" id="class-code" autocomplete="off" required pattern="[A-Za-z0-9_\-]{2,20}" aria-describedby="code-help">
+        </div>
+        <div class="field">
+          <label for="learner-code" data-i18n="learnerCode">Your learner code</label>
+          <input type="text" id="learner-code" autocomplete="off" required pattern="[A-Za-z0-9_\-]{2,20}" aria-describedby="code-help">
+          <span id="code-help" class="help" data-i18n="codeHelp">Given by your teacher: 2 to 20 letters, digits, - or _.</span>
+        </div>
+        <div class="field">
+          <label for="problem" data-i18n="problemLabel">Your equation</label>
+          <input type="text" id="problem" autocomplete="off" required aria-describedby="problem-help" spellcheck="false">
+          <span id="problem-help" class="help" data-i18n="problemHelp">For example x^2 - 5x + 6 = 0. TUNTAS coaches x² + bx + c = 0 with whole-number answers.</span>
+        </div>
+        <div class="row">
+          <button type="submit" class="primary" id="start-btn" data-i18n="startBtn">Start</button>
+        </div>
+        <p id="start-status" class="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <div id="session-view" class="layout" hidden>
+      <section class="panel" aria-labelledby="steps-h">
+        <h2 id="steps-h" data-i18n="stepsTitle">Your problem</h2>
+        <p class="problem" id="problem-display"></p>
+        <ol class="steps" id="steps"></ol>
+      </section>
+
+      <section class="panel tutor" aria-labelledby="tutor-h">
+        <h2 id="tutor-h" data-i18n="tutorTitle">Tutor</h2>
+        <div class="log" id="log" aria-live="polite"></div>
+        <div class="prompt" id="prompt">
+          <p id="prompt-text"></p>
+          <form id="answer-form" novalidate>
+            <div class="row">
+              <div class="field">
+                <label for="answer" data-i18n="answerLabel">Your answer</label>
+                <input type="text" id="answer" autocomplete="off" spellcheck="false" aria-describedby="answer-help">
+                <span id="answer-help" class="help"></span>
+              </div>
+              <button type="submit" class="primary" id="check-btn" data-i18n="checkBtn">Check answer</button>
+              <button type="button" class="secondary" id="hint-btn"></button>
+            </div>
+          </form>
+          <div class="row" id="continue-row" hidden>
+            <button type="button" class="primary" id="continue-btn" data-i18n="continueBtn">Continue with new numbers</button>
+          </div>
+          <div class="row" id="done-row" hidden>
+            <button type="button" class="primary" id="new-btn" data-i18n="newBtn">Start a new problem</button>
+          </div>
+          <p id="session-status" class="status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="mastery-h">
+        <h2 id="mastery-h" data-i18n="masteryTitle">Mastery (BKT)</h2>
+        <div id="mastery"></div>
+        <p class="note" id="mastery-note"></p>
+        <p class="note" id="hints-note"></p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

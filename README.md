@@ -1,3 +1,5 @@
+moved to [tuntas](https://github.com/ItzMojito/tuntas-project)
+
 # TUNTAS prototype
 
 TUNTAS is a Socratic maths tutor that keeps the answer to itself. You bring your own quadratic equation. TUNTAS checks the skills underneath it first, then locks each step until you solve a fresh version without help. The name comes from *belajar tuntas*, Indonesian for mastery learning.
